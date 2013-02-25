@@ -8,12 +8,19 @@
 
 angular.module('btford.socket-io', []).
   factory('socket', function ($rootScope) {
+    var safeApply = function(scope, fn) {
+      if (scope.$$phase) {
+        fn();
+      } else {
+        scope.$apply(fn);
+      }
+    };
     var socket = io.connect();
     return {
       on: function (eventName, callback) {
-        socket.on(eventName, function () {  
+        socket.on(eventName, function () {
           var args = arguments;
-          $rootScope.$apply(function () {
+          safeApply($rootScope, function () {
             callback.apply(socket, args);
           });
         });
@@ -21,7 +28,7 @@ angular.module('btford.socket-io', []).
       emit: function (eventName, data, callback) {
         socket.emit(eventName, data, function () {
           var args = arguments;
-          $rootScope.$apply(function () {
+          safeApply($rootScope, function () {
             if (callback) {
               callback.apply(socket, args);
             }
