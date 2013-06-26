@@ -36,7 +36,7 @@ angular.module('btford.socket-io', []).
 
         emit: function (eventName, data, callback) {
           if (callback) {
-            socket.emit(eventName, data, asyncAngularify);
+            socket.emit(eventName, data, asyncAngularify(callback));
           } else {
             socket.emit(eventName, data);
           }
