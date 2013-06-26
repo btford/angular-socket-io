@@ -18,15 +18,24 @@ angular.module('btford.socket-io', []).
           }, 0);
         });
       },
-      emit: function (eventName, data, callback) {
-        socket.emit(eventName, data, function () {
+      emit: function () {
+        if (arguments.length > 2){
+          var callback = arguments[arguments.length - 1]    
+        }
+        // slightly more complex than the usual example
+        // because it should took any length of arguments
+        var ngcallback = function () {
           var args = arguments;
           $rootScope.$apply(function () {
             if (callback) {
               callback.apply(socket, args);
             }
           });
-        });
+        }
+        var args = arguments
+        Array.prototype.splice.call(arguments, arguments.length -1 ,1)
+        Array.prototype.push.call(args, ngcallback)
+        socket.emit.apply(socket, args)
       }
     };
   });
