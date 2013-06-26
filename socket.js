@@ -7,15 +7,15 @@
 'use strict';
 
 angular.module('btford.socket-io', []).
-  factory('socket', function ($rootScope) {
+  factory('socket', function ($rootScope, $timeout) {
     var socket = io.connect();
     return {
       on: function (eventName, callback) {
         socket.on(eventName, function () {  
           var args = arguments;
-          $rootScope.$apply(function () {
+          $timeout(function () {
             callback.apply(socket, args);
-          });
+          }, 0);
         });
       },
       emit: function (eventName, data, callback) {
