@@ -7,26 +7,72 @@
 'use strict';
 
 angular.module('btford.socket-io', []).
-  factory('socket', function ($rootScope, $timeout) {
-    var socket = io.connect();
-    return {
-      on: function (eventName, callback) {
-        socket.on(eventName, function () {  
+  provider('socket', function () {
+
+    // when forwarding events, prefix the event name
+    var prefix = 'socket:';
+
+    // expose to provider
+    this.$get = function ($rootScope, $timeout) {
+
+      var socket = io.connect();
+
+      var asyncAngularify = function (callback) {
+        return function () {  
           var args = arguments;
           $timeout(function () {
             callback.apply(socket, args);
           }, 0);
-        });
-      },
-      emit: function (eventName, data, callback) {
-        socket.emit(eventName, data, function () {
+        };
+      };
+
+      var addListener = function (eventName, callback) {
+        socket.on(eventName, asyncAngularify(callback));
+      };
+
+      var wrappedSocket = {
+        on: addListener,
+        addListener: addListener,
+
+        emit: function (eventName, data, callback) {
+          if (callback) {
+            socket.emit(eventName, data, asyncAngularify);
+          } else {
+            socket.emit(eventName, data);
+          }
+        },
+
+        removeListener: function () {
           var args = arguments;
-          $rootScope.$apply(function () {
-            if (callback) {
-              callback.apply(socket, args);
-            }
+          return socket.removeListener.apply(socket, args);
+        },
+
+        // when socket.on('someEvent', fn (data) { ... }),
+        // call scope.$broadcast('someEvent', data)
+        forward: function (events, scope) {
+          if (events instanceof Array === false) {
+            events = [events];
+          }
+          if (!scope) {
+            scope = $rootScope;
+          }
+          events.forEach(function (eventName) {
+            var prefixed = prefix + eventName;
+            var forwardEvent = asyncAngularify(function (data) {
+              scope.$broadcast(prefixed, data);
+            });
+            scope.$on('$destroy', function () {
+              socket.removeListener(eventName, forwardEvent);
+            });
+            socket.on(eventName, forwardEvent);
           });
-        });
-      }
+        }
+      };
+
+      return wrappedSocket;
+    };
+
+    this.prefix = function (newPrefix) {
+      prefix = newPrefix;
     };
   });
