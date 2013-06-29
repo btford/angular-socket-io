@@ -35,11 +35,13 @@ angular.module('btford.socket-io', []).
         addListener: addListener,
 
         emit: function (eventName, data, callback) {
-          if (callback) {
-            socket.emit(eventName, data, asyncAngularify(callback));
-          } else {
-            socket.emit(eventName, data);
+          var lastIndex = arguments.length - 1;
+
+          if ('function' == typeof arguments[lastIndex]) {
+            arguments[lastIndex] = asyncAngularify(arguments[lastIndex]);
           }
+
+          socket.emit.apply(socket, arguments);
         },
 
         removeListener: function () {
