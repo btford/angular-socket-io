@@ -1,5 +1,5 @@
 /*
- * angular-socket-io v0.1.1
+ * angular-socket-io v0.1.2
  * (c) 2013 Brian Ford http://briantford.com
  * License: MIT
  */

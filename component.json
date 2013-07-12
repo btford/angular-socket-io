@@ -1,6 +1,6 @@
 {
   "name": "angular-socket-io",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "socket.js",
   "dependencies": {
     "angular": "~1.0.5"
