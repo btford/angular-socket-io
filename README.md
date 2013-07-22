@@ -94,6 +94,24 @@ config(function (socketProvider) {
 });
 ```
 
+### `socketProvider.path`
+
+This method changes the path of the socket server.
+The default path is `localhost`.
+
+#### Example
+
+To change the path:
+
+```javascript
+angular.module('myApp', [
+  'btford.socket-io'
+]).
+config(function (socketProvider) {
+  socketProvider.path('http"//myserver.com:3000');
+});
+```
+
 
 ## License
 MIT
