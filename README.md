@@ -29,6 +29,10 @@ Optionally takes a callback.
 
 Works just like the method of the same name from Socket.IO.
 
+### `socket.io`
+Gives direct access to the socket object.
+This can be useful when you have added prototypes to the SocketNamespace.
+
 ### `socket.forward`
 
 `socket.forward` allows you to forward the events recieved by Socket.IO's socket to AngularJS's event system.
