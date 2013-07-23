@@ -32,6 +32,7 @@ angular.module('btford.socket-io', []).
       };
 
       var wrappedSocket = {
+        io: socket,
         on: addListener,
         addListener: addListener,
 
