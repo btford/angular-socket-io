@@ -94,6 +94,22 @@ config(function (socketProvider) {
 });
 ```
 
+### `socketProvider.ioSocket`
+
+This method allows you to provide the `socket` service with a `Socket.IO socket` object to be used internally.
+This is useful if you want to connect on a different path, or need to hold a reference to the `Socket.IO socket` object for use elsewhere.
+
+```javascript
+angular.module('myApp', [
+  'btford.socket-io'
+]).
+config(function (socketProvider) {
+  var mySocket = io.connect('/some/other/path');
+  // do stuff with mySocket
+  socketProvider.ioSocket(mySocket);
+});
+```
+
 
 ## License
 MIT

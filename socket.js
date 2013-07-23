@@ -11,12 +11,12 @@ angular.module('btford.socket-io', []).
 
     // when forwarding events, prefix the event name
     var prefix = 'socket:',
-      path;
+      ioSocket;
 
     // expose to provider
     this.$get = function ($rootScope, $timeout) {
 
-      var socket = io.connect(path);
+      var socket = ioSocket || io.connect();
 
       var asyncAngularify = function (callback) {
         return function () {  
@@ -77,7 +77,7 @@ angular.module('btford.socket-io', []).
       prefix = newPrefix;
     };
 
-    this.path = function (newPath) {
-      path = newPath;
+    this.ioSocket = function (socket) {
+      ioSocket = socket;
     };
   });
