@@ -31,14 +31,14 @@ Works just like the method of the same name from Socket.IO.
 
 ### `socket.forward`
 
-`socket.forward` allows you to forward the events recieved by Socket.IO's socket to AngularJS's event system.
+`socket.forward` allows you to forward the events received by Socket.IO's socket to AngularJS's event system.
 You can then listen to the event with `$scope.$on`.
 By default, socket-forwarded events are namespaced with `socket:`.
 
 The first argument is a string or array of strings listing the event names to be forwarded.
 The second argument is optional, and is the scope on which the events are to be broadcast.
 If an argument is not provided, it defaults to `$rootScope`.
-As a reminder, broadcasted events are propegated down to descendant scopes.
+As a reminder, broadcasted events are propagated down to descendant scopes.
 
 #### Examples
 
@@ -64,7 +64,7 @@ angular.module('myApp.MyCtrl', []).
   });
 ```
 
-Avoid dublicating event handlers when a user navigates back and forth between routes:
+Avoid duplicating event handlers when a user navigates back and forth between routes:
 
 ```javascript
 angular.module('myMod', ['btford.socket-io']).
