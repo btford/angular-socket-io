@@ -44,6 +44,22 @@ angular.module('btford.socket-io', []).
           }
         },
 
+	get: function(url, data, callback) {
+	    return socket.get(url, data, callback);
+	},
+
+	post: function(url, data, callback) {
+	    return socket.post(url, data, callback);
+	},
+
+	put: function(url, data, callback) {
+	    return socket.put(url, data, callback);
+	},
+
+	delete: function(url, data, callback) {
+	    return socket.delete(url, data, callback);
+	},
+
         removeListener: function () {
           var args = arguments;
           return socket.removeListener.apply(socket, args);

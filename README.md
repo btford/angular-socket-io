@@ -115,7 +115,43 @@ config(function (socketProvider) {
   socketProvider.path('http"//myserver.com:3000');
 });
 ```
+#### (optional) CRUD Methods
+     These methods are completely optional and require that you alter the io.SocketNamespace to support them.
+     They are nice to have if you are aiming to replace $.get, $.post, $.put, or $.delete.
+     You will need to include the sails.io.js file for these to work.
 
+### `socket.get`
+    ```javascript
+    function GetStuff($scope, socket) {
+      socket.get('/my/url', function(data){
+        console.log(data);
+      });
+    }
+```
+### `socket.post`
+    ```javascript
+    function PostStuff($scope, socket) {
+      socket.post('/my/url', function(data){
+        console.log(data);
+      });
+    }
+```
+### `socket.put`
+    ```javascript
+    function PutStuff($scope, socket) {
+      socket.put('/my/url', function(data){
+        console.log(data);
+      });
+    }
+```
+### `socket.delete`
+    ```javascript
+    function DeleteStuff($scope, socket) {
+      socket.delete('/my/url', function(data){
+        console.log(data);
+      });
+    }
+```
 
 ## License
 MIT
