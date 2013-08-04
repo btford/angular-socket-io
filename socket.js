@@ -14,12 +14,12 @@ angular.module('btford.socket-io', []).
       ioSocket;
 
     // expose to provider
-    this.$get = function ($rootScope, $timeout) {
+    this.$get = ['$rootScope', '$timeout', function ($rootScope, $timeout) {
 
       var socket = ioSocket || io.connect();
 
       var asyncAngularify = function (callback) {
-        return function () {  
+        return function () {
           var args = arguments;
           $timeout(function () {
             callback.apply(socket, args);
@@ -71,7 +71,7 @@ angular.module('btford.socket-io', []).
       };
 
       return wrappedSocket;
-    };
+    }];
 
     this.prefix = function (newPrefix) {
       prefix = newPrefix;
