@@ -51,7 +51,7 @@ angular.module('myApp', [
   'btford.socket-io',
   'myApp.MyCtrl'
 ]).
-run(function () {
+run(function (socket) {
   socket.forward('error');
 });
 
