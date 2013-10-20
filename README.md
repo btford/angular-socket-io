@@ -76,6 +76,9 @@ angular.module('myMod', ['btford.socket-io']).
   });
 ```
 
+### `socket.reconnect`
+Reconnect client to the server.
+
 ### `socketProvider.prefix`
 
 This method changes the prefix for forwarded events.

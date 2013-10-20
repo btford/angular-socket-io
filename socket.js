@@ -35,6 +35,10 @@ angular.module('btford.socket-io', []).
         on: addListener,
         addListener: addListener,
 
+        reconnect: function() {
+          socket.socket.reconnect();
+        },
+
         emit: function (eventName, data, callback) {
           if (callback) {
             socket.emit(eventName, data, asyncAngularify(callback));
