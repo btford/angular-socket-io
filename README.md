@@ -58,7 +58,7 @@ run(function (socket) {
 // in one of your controllers
 angular.module('myApp.MyCtrl', []).
   controller('MyCtrl', function ($scope) {
-    $scope.on('socket:error', function (ev, data) {
+    $scope.$on('socket:error', function (ev, data) {
 
     });
   });
