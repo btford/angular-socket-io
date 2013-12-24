@@ -1,5 +1,6 @@
 # angular-socket-io
-Bower Component for using AngularJS with [Socket.IO](http://socket.io/), based on [this](http://briantford.com/blog/angular-socket-io.html).
+Bower Component for using AngularJS with [Socket.IO](http://socket.io/),
+based on [this](http://briantford.com/blog/angular-socket-io.html).
 
 
 ## Install
@@ -12,7 +13,45 @@ Bower Component for using AngularJS with [Socket.IO](http://socket.io/), based o
 
 ## Usage
 
-For the most part, this component works exactly like you would expect it to.
+This module exposes a `socketFactory`, which is an API for instantiating
+sockets that are integrated with Angular's digest cycle.
+
+
+### Making a Socket Instance
+
+```
+// in the top-level module of the app
+angular.module('myApp', [
+  'btford.socket-io',
+  'myApp.MyCtrl'
+]).
+factory('mySocket', function (socketFactory)) {
+  return socketFactory();
+});
+```
+
+With that, you can inject your `mySocket` service into controllers and
+other serivices within your application!
+
+### Using Your Socket Instance
+
+Building on the example above:
+
+```
+// in the top-level module of the app
+angular.module('myApp', [
+  'btford.socket-io',
+  'myApp.MyCtrl'
+]).
+factory('mySocket', function (socketFactory)) {
+  return socketFactory();
+});
+```
+
+
+## API
+
+For the most part, this component works exactly like you would expect.
 The only API addition is `socket.forward`, which makes it easier to add/remove listeners in a way that works with [AngularJS's scope](http://docs.angularjs.org/api/ng.$rootScope.Scope).
 
 ### `socket.on` / `socket.addListener`
@@ -45,14 +84,15 @@ As a reminder, broadcasted events are propagated down to descendant scopes.
 An easy way to make socket error events available across your app:
 
 ```javascript
-
 // in the top-level module of the app
 angular.module('myApp', [
   'btford.socket-io',
   'myApp.MyCtrl'
 ]).
-run(function (socket) {
-  socket.forward('error');
+factory('mySocket', function (socketFactory)) {
+  var mySocket = socketFactory();
+  mySocket.forward('error');
+  return mySocket;
 });
 
 // in one of your controllers
@@ -76,10 +116,37 @@ angular.module('myMod', ['btford.socket-io']).
   });
 ```
 
-### `socketProvider.prefix`
 
-This method changes the prefix for forwarded events.
+### `socketFactory({ ioSocket: }}`
+
+This option allows you to provide the `socket` service with a `Socket.IO socket` object to be used internally.
+This is useful if you want to connect on a different path, or need to hold a reference to the `Socket.IO socket` object for use elsewhere.
+
+```javascript
+angular.module('myApp', [
+  'btford.socket-io'
+]).
+factory('mySocket', function (socketFactory)) {
+  var myIoSocket = io.connect('/some/path');
+
+  mySocket = socketFactory({
+    ioSocket: myIoSocket
+  });
+
+  return mySocket;
+});
+```
+
+### `socketFactory({ scope: })`
+
+This option allows you to set the scope on which `$broadcast` is forwarded to when using the `forward` method.
+It defaults to `$rootScope`.
+
+
+### `socketFactory({ prefix: })`
+
 The default prefix is `socket:`.
+
 
 #### Example
 
@@ -94,19 +161,68 @@ config(function (socketProvider) {
 });
 ```
 
-### `socketProvider.ioSocket`
 
-This method allows you to provide the `socket` service with a `Socket.IO socket` object to be used internally.
-This is useful if you want to connect on a different path, or need to hold a reference to the `Socket.IO socket` object for use elsewhere.
+
+## Migrating from 0.2 to 0.3
+
+`angular-socket-io` version `0.3` changes X to make fewer assumptions
+about the lifecycle of the socket. Previously, the assumption was that your
+application has a single socket created at config time. While this holds
+for most apps I've seen, there's no reason you shouldn't be able to
+lazily create sockets, or have multiple connections.
+
+In `0.2`, `angular-socket-io` exposed a `socket` service. In `0.3`, it
+instead exposes a `socketFactory` service which returns socket instances.
+Thus, getting the old API is as simple as making your own `socket` service
+with `socketFactory`. The examples below demonstrate how to do this.
+
+### Simple Example
+
+In most cases, adding the following to your app should suffice:
+
+```javascript
+// ...
+factory('socket', function (socketFactory)) {
+  return socketFactory();
+});
+// ...
+```
+
+### Example with Configuration
+
+Before:
 
 ```javascript
 angular.module('myApp', [
   'btford.socket-io'
 ]).
-config(function (socketProvider) {
-  var mySocket = io.connect('/some/other/path');
-  // do stuff with mySocket
-  socketProvider.ioSocket(mySocket);
+config(function (socketProvider)) {
+  socketProvider.prefix('foo~');
+  socketProvider.ioSocket(io.connect('/some/path'));
+}).
+controller('MyCtrl', function (socket) {
+  socket.on('foo~bar', function () {
+    $scope.bar = true;
+  });
+});
+```
+
+After:
+
+```javascript
+angular.module('myApp', [
+  'btford.socket-io'
+]).
+factory('socket', function (socketFactory)) {
+  return socketFactory({
+    prefix: 'foo~',
+    ioSocket: io.connect('/some/path')
+  });
+}).
+controller('MyCtrl', function (socket) {
+  socket.on('foo~bar', function () {
+    $scope.bar = true;
+  });
 });
 ```
 
