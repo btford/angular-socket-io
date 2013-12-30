@@ -196,7 +196,7 @@ Before:
 angular.module('myApp', [
   'btford.socket-io'
 ]).
-config(function (socketProvider)) {
+config(function (socketProvider) {
   socketProvider.prefix('foo~');
   socketProvider.ioSocket(io.connect('/some/path'));
 }).
@@ -213,7 +213,7 @@ After:
 angular.module('myApp', [
   'btford.socket-io'
 ]).
-factory('socket', function (socketFactory)) {
+factory('socket', function (socketFactory) {
   return socketFactory({
     prefix: 'foo~',
     ioSocket: io.connect('/some/path')
