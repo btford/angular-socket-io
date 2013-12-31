@@ -25,7 +25,7 @@ angular.module('myApp', [
   'btford.socket-io',
   'myApp.MyCtrl'
 ]).
-factory('mySocket', function (socketFactory)) {
+factory('mySocket', function (socketFactory) {
   return socketFactory();
 });
 ```
@@ -43,7 +43,7 @@ angular.module('myApp', [
   'btford.socket-io',
   'myApp.MyCtrl'
 ]).
-factory('mySocket', function (socketFactory)) {
+factory('mySocket', function (socketFactory) {
   return socketFactory();
 });
 ```
@@ -89,7 +89,7 @@ angular.module('myApp', [
   'btford.socket-io',
   'myApp.MyCtrl'
 ]).
-factory('mySocket', function (socketFactory)) {
+factory('mySocket', function (socketFactory) {
   var mySocket = socketFactory();
   mySocket.forward('error');
   return mySocket;
@@ -126,7 +126,7 @@ This is useful if you want to connect on a different path, or need to hold a ref
 angular.module('myApp', [
   'btford.socket-io'
 ]).
-factory('mySocket', function (socketFactory)) {
+factory('mySocket', function (socketFactory) {
   var myIoSocket = io.connect('/some/path');
 
   mySocket = socketFactory({
@@ -182,7 +182,7 @@ In most cases, adding the following to your app should suffice:
 
 ```javascript
 // ...
-factory('socket', function (socketFactory)) {
+factory('socket', function (socketFactory) {
   return socketFactory();
 });
 // ...
