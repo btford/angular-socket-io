@@ -16,13 +16,15 @@ describe('socketFactory', function () {
       $timeout,
       $browser,
       mockIoSocket,
-      spy;
+      spy,
+      otherSpy;
 
   beforeEach(inject(function (socketFactory, _$browser_, $rootScope, _$timeout_) {
     $browser = _$browser_;
     $timeout = _$timeout_;
     scope = $rootScope.$new();
     spy = jasmine.createSpy('emitSpy');
+    otherSpy = jasmine.createSpy('otherEmitSpy');
     mockIoSocket = io.connect();
     socket = socketFactory({
       ioSocket: mockIoSocket,
@@ -65,6 +67,20 @@ describe('socketFactory', function () {
     it('should not call after removing an event', function () {
       socket.on('event', spy);
       socket.removeListener('event', spy);
+
+      mockIoSocket.emit('event');
+
+      expect($browser.deferredFns.length).toBe(0);
+    });
+
+  });
+
+  describe('#removeAllListeners', function () {
+
+    it('should not call after removing an event', function () {
+      socket.on('event', spy);
+      socket.on('event', otherSpy);
+      socket.removeAllListeners('event');
 
       mockIoSocket.emit('event');
 

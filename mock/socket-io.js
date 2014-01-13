@@ -12,7 +12,10 @@ function createMockSocketObject () {
       return (this._listeners[ev] || angular.noop)(data);
     },
     _listeners: {},
-    removeListener: function (ev) {
+    removeListener: function (ev, fn) {
+      delete this._listeners[ev];
+    },
+    removeAllListeners: function (ev) {
       delete this._listeners[ev];
     }
   };
