@@ -19,7 +19,7 @@ sockets that are integrated with Angular's digest cycle.
 
 ### Making a Socket Instance
 
-```
+```javascript
 // in the top-level module of the app
 angular.module('myApp', [
   'btford.socket-io',
@@ -37,7 +37,7 @@ other serivices within your application!
 
 Building on the example above:
 
-```
+```javascript
 // in the top-level module of the app
 angular.module('myApp', [
   'btford.socket-io',
@@ -110,7 +110,7 @@ Avoid duplicating event handlers when a user navigates back and forth between ro
 angular.module('myMod', ['btford.socket-io']).
   controller('MyCtrl', function ($scope, socket) {
     socket.forward('someEvent', $scope);
-    scope.$on('socket:someEvent', function (ev, data) {
+    $scope.$on('socket:someEvent', function (ev, data) {
       $scope.theData = data;
     });
   });
