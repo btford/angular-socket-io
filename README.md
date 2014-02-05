@@ -226,6 +226,10 @@ controller('MyCtrl', function (socket) {
 });
 ```
 
+## See Also
+
+* [ngSocket](https://github.com/jeffbcross/ngSocket)
+
 
 ## License
 MIT
