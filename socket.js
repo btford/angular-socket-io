@@ -38,6 +38,7 @@ angular.module('btford.socket-io', []).
         var wrappedSocket = {
           on: addListener,
           addListener: addListener,
+          socket: socket.socket,
 
           emit: function (eventName, data, callback) {
             return socket.emit(eventName, data, asyncAngularify(socket, callback));
