@@ -9,6 +9,7 @@ gulp.task('scripts', function() {
                 pipe(rename('socket.min.js')).
                 pipe(ngmin()).
                 pipe(uglify({
+                    preserveComments: 'some',
                     outSourceMap: true
                 })).
                 pipe(gulp.dest('.'));
