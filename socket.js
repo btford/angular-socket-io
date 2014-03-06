@@ -1,6 +1,6 @@
 /*
  * @license
- * angular-socket-io v0.3.0
+ * angular-socket-io v0.4.0
  * (c) 2014 Brian Ford http://briantford.com
  * License: MIT
  */
