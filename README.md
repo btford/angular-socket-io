@@ -66,6 +66,10 @@ Works just like the method of the same name from Socket.IO.
 Takes an event name and callback.
 Works just like the method of the same name from Socket.IO.
 
+### `socket.removeAllListeners`
+Takes an event name.
+Works just like the method of the same name from Socket.IO.
+
 ### `socket.emit`
 Sends a message to the server.
 Optionally takes a callback.
