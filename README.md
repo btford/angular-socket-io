@@ -232,7 +232,7 @@ controller('MyCtrl', function (socket) {
 ## See Also
 
 * [ngSocket](https://github.com/jeffbcross/ngSocket)
-
+* [angular-socket.io-mock](https://github.com/nullivex/angular-socket.io-mock)
 
 ## License
 MIT
