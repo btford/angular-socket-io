@@ -33,7 +33,7 @@ angular.module('btford.socket-io', []).
         var defaultScope = options.scope || $rootScope;
 
         var addListener = function (eventName, callback) {
-          socket.on(eventName, asyncAngularify(socket, callback));
+          socket.on(eventName, callback.__ng = asyncAngularify(socket, callback));
         };
 
         var wrappedSocket = {
@@ -50,7 +50,10 @@ angular.module('btford.socket-io', []).
             return socket.emit.apply(socket, arguments);
           },
 
-          removeListener: function () {
+          removeListener: function (ev, fn) {
+            if (fn && fn.__ng) {
+              arguments[1] = fn.__ng;
+            }
             return socket.removeListener.apply(socket, arguments);
           },
 
