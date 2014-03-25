@@ -57,6 +57,24 @@ describe('socketFactory', function () {
       expect(mockIoSocket.emit).toHaveBeenCalled();
     });
 
+    it('should allow multiple data arguments', function () {
+      spyOn(mockIoSocket, 'emit');
+      socket.emit('event', 'x', 'y');
+      expect(mockIoSocket.emit).toHaveBeenCalledWith('event', 'x', 'y');
+    });
+
+    it('should wrap the callback with multiple data arguments', function () {
+      spyOn(mockIoSocket, 'emit');
+      socket.emit('event', 'x', 'y', spy);
+      expect(mockIoSocket.emit.mostRecentCall.args[3]).toNotBe(spy);
+
+      mockIoSocket.emit.mostRecentCall.args[3]();
+      expect(spy).not.toHaveBeenCalled();
+      $timeout.flush();
+
+      expect(spy).toHaveBeenCalled();
+    });
+
   });
 
 
