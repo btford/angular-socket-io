@@ -35,10 +35,15 @@ angular.module('btford.socket-io', []).
         var addListener = function (eventName, callback) {
           socket.on(eventName, callback.__ng = asyncAngularify(socket, callback));
         };
+        
+        var addOnceListener = function (eventName, callback) {
+          socket.once(eventName, callback.__ng = asyncAngularify(socket, callback));
+        };
 
         var wrappedSocket = {
           on: addListener,
           addListener: addListener,
+          once: addOnceListener,
 
           emit: function (eventName, data, callback) {
             var lastIndex = arguments.length - 1;
