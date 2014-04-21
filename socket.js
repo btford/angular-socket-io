@@ -1,6 +1,6 @@
 /*
  * @license
- * angular-socket-io v0.4.1
+ * angular-socket-io v0.5.0
  * (c) 2014 Brian Ford http://briantford.com
  * License: MIT
  */
@@ -35,7 +35,7 @@ angular.module('btford.socket-io', []).
         var addListener = function (eventName, callback) {
           socket.on(eventName, callback.__ng = asyncAngularify(socket, callback));
         };
-        
+
         var addOnceListener = function (eventName, callback) {
           socket.once(eventName, callback.__ng = asyncAngularify(socket, callback));
         };
