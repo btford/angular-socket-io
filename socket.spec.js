@@ -47,6 +47,35 @@ describe('socketFactory', function () {
   });
 
 
+  describe('#once', function () {
+
+    it('should apply asynchronously', function () {
+      socket.once('event', spy);
+
+      mockIoSocket.emit('event');
+
+      expect(spy).not.toHaveBeenCalled();
+      $timeout.flush();
+
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should only run once', function () {
+      var counter = 0;
+      socket.once('event', function () {
+        counter += 1;
+      });
+
+      mockIoSocket.emit('event');
+      mockIoSocket.emit('event');
+      $timeout.flush();
+
+      expect(counter).toBe(1);
+    });
+
+  });
+
+
   describe('#emit', function () {
 
     it('should call the delegate socket\'s emit', function () {

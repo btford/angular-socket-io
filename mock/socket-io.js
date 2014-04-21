@@ -8,11 +8,18 @@ function createMockSocketObject () {
     on: function (ev, fn) {
       (this._listeners[ev] = this._listeners[ev] || []).push(fn);
     },
+    once: function (ev, fn) {
+      (this._listeners[ev] = this._listeners[ev] || []).push(fn);
+      fn._once = true;
+    },
     emit: function (ev, data) {
       if (this._listeners[ev]) {
         this._listeners[ev].forEach(function (listener) {
+          if (listener._once) {
+            this.removeListener(ev, listener);
+          }
           listener(data);
-        });
+        }.bind(this));
       }
     },
     _listeners: {},
