@@ -40,6 +40,7 @@ function createMockSocketObject () {
         this._listeners = {};
       }
     },
+    disconnect: function () {}
   };
 
   return socket;

@@ -47,6 +47,17 @@ describe('socketFactory', function () {
   });
 
 
+  describe('#disconnect', function () {
+
+    it('should call the underlying socket.disconnect', function () {
+      mockIoSocket.disconnect = spy;
+      socket.disconnect();
+      expect(spy).toHaveBeenCalled();
+    });
+
+  });
+
+
   describe('#once', function () {
 
     it('should apply asynchronously', function () {
