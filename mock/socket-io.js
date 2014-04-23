@@ -32,7 +32,14 @@ function createMockSocketObject () {
       } else {
         delete this._listeners[ev];
       }
-    }
+    },
+    removeAllListeners: function (ev) {
+      if (ev) {
+        delete this._listeners[ev];
+      } else {
+        this._listeners = {};
+      }
+    },
   };
 
   return socket;

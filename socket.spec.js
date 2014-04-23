@@ -121,6 +121,31 @@ describe('socketFactory', function () {
   });
 
 
+  describe('#removeAllListeners', function () {
+
+    it('should not call after removing listeners for an event', function () {
+      socket.on('event', spy);
+      socket.removeAllListeners('event');
+
+      mockIoSocket.emit('event');
+
+      expect($browser.deferredFns.length).toBe(0);
+    });
+
+    it('should not call after removing all listeners', function () {
+      socket.on('event', spy);
+      socket.on('event2', spy);
+      socket.removeAllListeners();
+
+      mockIoSocket.emit('event');
+      mockIoSocket.emit('event2');
+
+      expect($browser.deferredFns.length).toBe(0);
+    });
+
+  });
+
+
   describe('#forward', function () {
 
     it('should forward events', function () {
