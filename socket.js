@@ -5,10 +5,10 @@
  * License: MIT
  */
 
-'use strict';
-
 angular.module('btford.socket-io', []).
   provider('socketFactory', function () {
+
+    'use strict';
 
     // when forwarding events, prefix the event name
     var defaultPrefix = 'socket:',
