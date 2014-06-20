@@ -234,10 +234,17 @@ controller('MyCtrl', function (socket) {
 });
 ```
 
+
+## FAQ
+
+[Closed issues labelled `FAQ`](https://github.com/btford/angular-socket-io/issues?labels=faq&page=1&state=closed) might have the answer to your question.
+
+
 ## See Also
 
 * [ngSocket](https://github.com/jeffbcross/ngSocket)
 * [angular-socket.io-mock](https://github.com/nullivex/angular-socket.io-mock)
+
 
 ## License
 MIT
