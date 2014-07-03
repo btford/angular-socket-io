@@ -6,7 +6,7 @@
  */
 
 angular.module('btford.socket-io', []).
-  provider('socketFactory', function () {
+  provider('socketFactory', [function () {
 
     'use strict';
 
@@ -95,4 +95,4 @@ angular.module('btford.socket-io', []).
         return wrappedSocket;
       };
     };
-  });
+  }]);
