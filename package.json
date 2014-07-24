@@ -6,7 +6,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "./node_modules/.bin/karma start --browsers Firefox --single-run"
+    "test": "./node_modules/.bin/karma start --browsers Firefox --single-run",
+    "prepublish": "bower install",
+    "build": "gulp scripts"
   },
   "author": "Brian Ford",
   "license": "MIT",
