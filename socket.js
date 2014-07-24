@@ -15,7 +15,7 @@ angular.module('btford.socket-io', []).
       ioSocket;
 
     // expose to provider
-    this.$get = function ($rootScope, $timeout) {
+    this.$get = ['$rootScope', '$timeout', function ($rootScope, $timeout) {
 
       var asyncAngularify = function (socket, callback) {
         return callback ? function () {
@@ -94,5 +94,5 @@ angular.module('btford.socket-io', []).
 
         return wrappedSocket;
       };
-    };
+    }];
   });
