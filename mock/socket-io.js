@@ -14,11 +14,12 @@ function createMockSocketObject () {
     },
     emit: function (ev, data) {
       if (this._listeners[ev]) {
+        var args = arguments;
         this._listeners[ev].forEach(function (listener) {
           if (listener._once) {
             this.removeListener(ev, listener);
           }
-          listener(data);
+          listener.apply(null, Array.prototype.slice.call(args, 1));
         }.bind(this));
       }
     },

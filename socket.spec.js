@@ -239,6 +239,15 @@ describe('socketFactory', function () {
 
       expect(child.$broadcast).toHaveBeenCalled();
     });
+
+    it('should pass all arguments to scope.$on', function () {
+      socket.forward('event');
+      scope.$on('socket:event', spy);
+      mockIoSocket.emit('event', 1, 2, 3);
+      $timeout.flush();
+
+      expect(spy.calls[0].args.slice(1)).toEqual([1, 2, 3]);
+    });
   });
 
 });

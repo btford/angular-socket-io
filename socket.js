@@ -81,8 +81,9 @@ angular.module('btford.socket-io', []).
             }
             events.forEach(function (eventName) {
               var prefixedEvent = prefix + eventName;
-              var forwardBroadcast = asyncAngularify(socket, function (data) {
-                scope.$broadcast(prefixedEvent, data);
+              var forwardBroadcast = asyncAngularify(socket, function () {
+                Array.prototype.unshift.call(arguments, prefixedEvent);
+                scope.$broadcast.apply(scope, arguments);
               });
               scope.$on('$destroy', function () {
                 socket.removeListener(eventName, forwardBroadcast);
