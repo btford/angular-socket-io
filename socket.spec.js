@@ -156,6 +156,17 @@ describe('socketFactory', function () {
 
   });
 
+  describe('#io', function() {
+
+    it('should return socket.io', function () {
+      spyOn(socket, 'io');
+
+      socket.io();
+
+      expect(socket.io).toHaveBeenCalled();
+    });
+  });
+
 
   describe('#forward', function () {
 

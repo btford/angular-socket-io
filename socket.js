@@ -66,6 +66,10 @@ angular.module('btford.socket-io', []).
             return socket.removeAllListeners.apply(socket, arguments);
           },
 
+          io: function() {
+            return socket.io;
+          },
+
           disconnect: function (close) {
             return socket.disconnect(close);
           },
