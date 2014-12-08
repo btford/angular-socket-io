@@ -41,7 +41,8 @@ function createMockSocketObject () {
         this._listeners = {};
       }
     },
-    disconnect: function () {}
+    disconnect: function () {},
+    connect: function () {}
   };
 
   return socket;
