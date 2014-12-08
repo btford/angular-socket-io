@@ -1,21 +1,16 @@
-// Karma configuration
 
 module.exports = function (config) {
   config.set({
     basePath: '',
     files: [
       'mock/socket-io.js',
-      'bower_components/angular/angular.js',
-      'bower_components/angular-mocks/angular-mocks.js',
+      'node_modules/angular/angular.js',
+      'node_modules/angular-mocks/angular-mocks.js',
       'socket.js',
       '*.spec.js'
     ],
 
-    preprocessors: {
-      'socket.js': ['coverage']
-    },
-
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress'],
 
     port: 9876,
     colors: true,
