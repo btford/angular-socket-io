@@ -164,8 +164,14 @@ To remove the prefix:
 angular.module('myApp', [
   'btford.socket-io'
 ]).
-config(function (socketProvider) {
-  socketProvider.prefix('');
+factory('mySocket', function (socketFactory) {
+  var myIoSocket = io.connect('/some/path');
+
+  mySocket = socketFactory({
+    prefix: ''
+  });
+
+  return mySocket;
 });
 ```
 
