@@ -97,6 +97,21 @@ angular.module('btford.socket-io', []).
           }
         };
 
+        // Add conditional support for deferred sockets
+        var keep_deferred;
+
+        if (socket.hasOwnProperty('deferred')) {
+          wrappedSocket.swapSocket = function(newSocket) {
+            // Keep a reference for later on
+            if (socket.hasOwnProperty('deferred')) keep_deferred = socket;
+            // Allow for more than one replacement, i.e connect to a different server
+            if (keep_deferred) {
+              socket = newSocket;
+              keep_deferred.bootstrap(wrappedSocket);
+            }
+          }
+        }
+
         return wrappedSocket;
       };
     }];

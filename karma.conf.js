@@ -7,6 +7,7 @@ module.exports = function (config) {
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
       'socket.js',
+      'socket-deferred.js',
       '*.spec.js'
     ],
 
