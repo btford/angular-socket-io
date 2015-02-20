@@ -74,6 +74,10 @@ angular.module('btford.socket-io', []).
             return socket.connect();
           },
 
+          reconnect: function() {
+            return socket.io.reconnect();
+          },
+
           // when socket.on('someEvent', fn (data) { ... }),
           // call scope.$broadcast('someEvent', data)
           forward: function (events, scope) {

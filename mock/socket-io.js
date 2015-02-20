@@ -42,7 +42,10 @@ function createMockSocketObject () {
       }
     },
     disconnect: function () {},
-    connect: function () {}
+    connect: function () {},
+    io: {
+      reconnect: function () {}
+    }
   };
 
   return socket;
