@@ -8,6 +8,10 @@
   "scripts": {
     "test": "./node_modules/.bin/karma start --browsers Firefox --single-run"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/btford/angular-socket-io.git"
+  },
   "author": "Brian Ford",
   "license": "MIT",
   "devDependencies": {
