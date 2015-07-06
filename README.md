@@ -137,11 +137,10 @@ angular.module('myApp', [
 factory('mySocket', function (socketFactory) {
   var myIoSocket = io.connect('/some/path');
 
-  mySocket = socketFactory({
+  return socketFactory({
     ioSocket: myIoSocket
   });
 
-  return mySocket;
 });
 ```
 
