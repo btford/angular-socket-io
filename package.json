@@ -1,6 +1,6 @@
 {
   "name": "angular-socket-io",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "main": "socket.js",
   "directories": {
     "test": "test"
