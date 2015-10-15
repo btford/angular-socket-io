@@ -44,6 +44,21 @@ describe('socketFactory', function () {
       expect(spy).toHaveBeenCalled();
     });
 
+    it('should add listeners in chain', function () {
+      var counter = 0,
+          func = function () {
+            counter += 1;
+          };
+
+      socket.on('event1', func)
+            .on('event2', func);
+
+      mockIoSocket.emit('event1');
+      mockIoSocket.emit('event2');
+      $timeout.flush();
+
+      expect(counter).toBe(2);
+    });
   });
 
 
