@@ -164,8 +164,8 @@ To remove the prefix:
 angular.module('myApp', [
   'btford.socket-io'
 ]).
-config(function (socketProvider) {
-  socketProvider.prefix('');
+config(function (socketFactoryProvider) {
+  socketFactoryProvider.prefix('');
 });
 ```
 
@@ -204,9 +204,9 @@ Before:
 angular.module('myApp', [
   'btford.socket-io'
 ]).
-config(function (socketProvider) {
-  socketProvider.prefix('foo~');
-  socketProvider.ioSocket(io.connect('/some/path'));
+config(function (socketFactoryProvider) {
+  socketFactoryProvider.prefix('foo~');
+  socketFactoryProvider.ioSocket(io.connect('/some/path'));
 }).
 controller('MyCtrl', function (socket) {
   socket.on('foo~bar', function () {
