@@ -67,6 +67,15 @@ describe('socketFactory', function () {
 
   });
 
+  describe('#reconnect', function () {
+
+    it('should call the underlying socket.io.reconnect', function () {
+      mockIoSocket.io.reconnect = spy;
+      socket.reconnect();
+      expect(spy).toHaveBeenCalled();
+    });
+
+  });
 
   describe('#once', function () {
 
