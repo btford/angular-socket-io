@@ -1,7 +1,7 @@
 {
   "name": "angular-socket-io",
   "version": "0.7.0",
-  "main": "socket.js",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },
