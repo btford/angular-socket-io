@@ -7,10 +7,12 @@ function createMockSocketObject () {
   var socket = {
     on: function (ev, fn) {
       (this._listeners[ev] = this._listeners[ev] || []).push(fn);
+      return this;
     },
     once: function (ev, fn) {
       (this._listeners[ev] = this._listeners[ev] || []).push(fn);
       fn._once = true;
+      return this;
     },
     emit: function (ev, data) {
       if (this._listeners[ev]) {
