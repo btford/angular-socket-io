@@ -45,7 +45,7 @@ angular.module('btford.socket-io', []).
           addListener: addListener,
           once: addOnceListener,
 
-          emit: function (eventName, data, callback) {
+          emit: function () {
             var lastIndex = arguments.length - 1;
             var callback = arguments[lastIndex];
             if(typeof callback == 'function') {
