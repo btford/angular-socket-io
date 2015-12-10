@@ -12,7 +12,7 @@ based on [this](http://briantford.com/blog/angular-socket-io.html).
 4. Add `btford.socket-io` as a module dependency to your app.
 
 
-## Usage
+## UsagesocketFactory({ ioSocket: }}
 
 This module exposes a `socketFactory`, which is an API for instantiating
 sockets that are integrated with Angular's digest cycle.
@@ -125,7 +125,7 @@ angular.module('myMod', ['btford.socket-io']).
 ```
 
 
-### `socketFactory({ ioSocket: }}`
+### `socketFactory({ ioSocket: })`
 
 This option allows you to provide the `socket` service with a `Socket.IO socket` object to be used internally.
 This is useful if you want to connect on a different path, or need to hold a reference to the `Socket.IO socket` object for use elsewhere.
