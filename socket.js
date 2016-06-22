@@ -47,7 +47,7 @@ angular.module('btford.socket-io', []).
 
           emit: function (eventName, data, callback) {
             var lastIndex = arguments.length - 1;
-            var callback = arguments[lastIndex];
+            callback = arguments[lastIndex];
             if(typeof callback == 'function') {
               callback = asyncAngularify(socket, callback);
               arguments[lastIndex] = callback;
