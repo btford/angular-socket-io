@@ -1,6 +1,6 @@
 /*
  * @license
- * angular-socket-io v0.7.0
+ * angular-socket-io v0.7.1
  * (c) 2014 Brian Ford http://briantford.com
  * License: MIT
  */
@@ -33,11 +33,11 @@ angular.module('btford.socket-io', []).
         var defaultScope = options.scope || $rootScope;
 
         var addListener = function (eventName, callback) {
-          socket.on(eventName, callback.__ng = asyncAngularify(socket, callback));
+          return socket.on(eventName, callback.__ng = asyncAngularify(socket, callback));
         };
 
         var addOnceListener = function (eventName, callback) {
-          socket.once(eventName, callback.__ng = asyncAngularify(socket, callback));
+          return socket.once(eventName, callback.__ng = asyncAngularify(socket, callback));
         };
 
         var wrappedSocket = {
