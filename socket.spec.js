@@ -260,4 +260,10 @@ describe('socketFactory', function () {
     });
   });
 
+
+  describe("socket variable", function(){
+    it('should have socket instance present', function(){
+      expect(socket.socket).toBeDefined();
+    });
+  });
 });
