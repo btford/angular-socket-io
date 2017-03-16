@@ -205,8 +205,8 @@ angular.module('myApp', [
   'btford.socket-io'
 ]).
 config(function (socketFactoryProvider) {
-  socketFactoryProvider.prefix('foo~');
-  socketFactoryProvider.ioSocket(io.connect('/some/path'));
+  socketFactoryProvider.prefix = 'foo~';
+  socketFactoryProvider.ioSocket = io.connect('/some/path');
 }).
 controller('MyCtrl', function (socket) {
   socket.on('foo~bar', function () {
