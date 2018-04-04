@@ -2,6 +2,7 @@
   "name": "angular-socket-io",
   "version": "0.7.0",
   "main": "socket.js",
+  "license": "MIT", 
   "dependencies": {
     "angular": "^1.2.6"
   },
